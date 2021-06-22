@@ -1,0 +1,19 @@
+# sudo cp ws_msg_relay.service /etc/systemd/system/
+# sudo systemctl enable ws_msg_relay
+# sudo systemctl restart ws_msg_relay
+# sudo systemctl status ws_msg_relay
+# sudo journalctl -u ws_msg_relay
+
+[Unit]
+Description=WebSocket Message Relay Service
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=www-data
+ExecStart=/usr/bin/python3 -u /var/www/ws_msg_relay/ws_msg_relay.py
+
+[Install]
+WantedBy=multi-user.target
